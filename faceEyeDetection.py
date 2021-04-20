@@ -30,7 +30,7 @@ while True:
         for (ox, oy, ol, oa) in olhosDetec:
             cv2.rectangle(regiao, (ox, oy), (ox + ol, oy + oa), (255, 0, 255), 2)
 
-    cv2.imshow('Vídeo', cv2.resize(frame,(640,480)))
+    cv2.imshow('Video', cv2.resize(frame,(640,480)))
 
     if cv2.waitKey(1) == ord('q'):
         break
