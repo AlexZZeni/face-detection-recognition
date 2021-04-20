@@ -11,8 +11,10 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 #iniciate id counter
 id = 0
 # names related to ids: example ==> Marcelo: id=1,  etc
-names = ['None', 'Alexandre', 'Paula', 'Ilza', 'Z', 'W'] 
+names = ['None', 'Alexandre'] 
 # Initialize and start realtime video capture
+#url = 'http://192.168.69.171:8080/video'
+#cam = cv2.VideoCapture(url)
 cam = cv2.VideoCapture(0)
 cam.set(3, 640) # set video widht
 cam.set(4, 480) # set video height
