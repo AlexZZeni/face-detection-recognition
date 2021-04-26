@@ -15,7 +15,7 @@ def cadastroRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casca
 
     i = 0
     while(True):
-        ret, imagem = video.read()
+        imagem = video.read()
         cinza = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
         faces = faceDetector.detecMultiScale(cinza, scaleFactor=1.05, minNeighbors=9, minSize=(30,30))
 
@@ -75,7 +75,7 @@ def reconheceRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casc
     minA = 0.1 * video.get(4)
 
     while(True):
-        ret, imagem = video.read()
+        imagem = video.read()
         cinza = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
         faces = classificador.detectMultiScale(cinza, scaleFactor = 1.2, minNeighbors = 5, minSize = (int(minL), int(minA)))
 
