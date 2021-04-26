@@ -32,6 +32,7 @@ def cadastroRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casca
 
     # parte que relaciona nome e id do usuario
     # necessario codificar
+    # possivel estrutura {id : 1, nome : "nome", foto : "dirfoto.jpg"}
 
     video.release()
     cv2.destroyAllWindows()
