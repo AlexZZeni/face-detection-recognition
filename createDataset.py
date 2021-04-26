@@ -33,7 +33,7 @@ while(True):
     if k == 27:
         break
     elif count >= 30: # Take 30 face sample and stop video
-         break
+        break
 
 # Do a bit of cleanup
 print("\n [INFO] Exiting Program and cleanup stuff")
