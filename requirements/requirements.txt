@@ -3,3 +3,5 @@ https://www.lfd.uci.edu/~gohlke/pythonlibs/
 https://github.com/opencv/opencv
 
 pip install opencv-contrib-python
+
+pip install opencv-python
