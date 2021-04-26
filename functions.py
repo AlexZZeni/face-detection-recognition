@@ -37,7 +37,7 @@ def cadastroRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casca
     video.release()
     cv2.destroyAllWindows()
 
-def treinaRosto (classifierDir = 'cascades\\haarcascade_frontalface_default.xml', datasetDir = 'dataset\\', trainerDir = 'trainer\\trainer.yml'):
+def treinaRosto (classifierDir = 'cascades\\haarcascade_frontalface_default.xml', trainerDir = 'trainer\\trainer.yml', datasetDir = 'dataset\\'):
     reconhecedor = cv2.face.LBPHFaceRecognizer_create()
     detector = cv2.CascadeClassifier(classifierDir)
 
