@@ -37,6 +37,8 @@ def cadastroRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casca
     video.release()
     cv2.destroyAllWindows()
 
+    return faceID, faceNome
+
 def treinaRosto (classifierDir = 'cascades\\haarcascade_frontalface_default.xml', trainerDir = 'trainer\\trainer.yml', datasetDir = 'dataset\\'):
     reconhecedor = cv2.face.LBPHFaceRecognizer_create()
     detector = cv2.CascadeClassifier(classifierDir)
@@ -58,7 +60,7 @@ def treinaRosto (classifierDir = 'cascades\\haarcascade_frontalface_default.xml'
     reconhecedor.train(amostrasFaces, np.array(IDs))
     reconhecedor.write(trainerDir)
 
-def reconheceRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'cascades\\haarcascade_frontalface_default.xml', trainerDir = 'trainer\\trainer.yml'):
+def reconheceRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'cascades\\haarcascade_frontalface_default.xml', trainerDir = 'trainer\\trainer.yml', nomes=0, IDs=0):
     reconhecedor = cv2.face.LBPHFaceRecognizer_create()
     reconhecedor.read(trainerDir)
     classificador = cv2.CascadeClassifier(classifierDir)
@@ -67,7 +69,7 @@ def reconheceRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casc
     # necessario codificar
     font = cv2.FONT_HERSHEY_SIMPLEX
     id = 0
-    nomes = ['Vazia', 'Alexandre', 'Leonardo']
+#    nomes = ['Vazia', 'Alexandre', 'Leonardo']
 
     video = cv2.VideoCapture(stream)
     video.set(3, tamanhoVideo[0]) # largura da imagem
