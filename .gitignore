@@ -3,4 +3,4 @@
 # Arquivo com mapa dos rostos
 *.yml
 
-*.pcy
+*.pyc
