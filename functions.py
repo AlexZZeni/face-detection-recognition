@@ -4,7 +4,7 @@ from PIL import Image
 import os
 import ssl
 
-def cadastroRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'cascades\\haarcascade_frontalface_default.xml', datasetDir = 'dataset\\'):
+def cadastroRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'cascades/haarcascade_frontalface_default.xml', datasetDir = 'dataset/'):
     video = cv2.VideoCapture(stream)
     video.set(3, tamanhoVideo[0]) # largura da imagem
     video.set(4, tamanhoVideo[1]) # altura da imagem
@@ -15,9 +15,9 @@ def cadastroRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casca
 
     i = 0
     while(True):
-        imagem = video.read()
+        _, imagem = video.read()
         cinza = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
-        faces = faceDetector.detecMultiScale(cinza, scaleFactor=1.05, minNeighbors=9, minSize=(30,30))
+        faces = faceDetector.detectMultiScale(cinza, scaleFactor=1.05, minNeighbors=9, minSize=(30,30))
 
         for(x, y, l, a) in faces:
             cv2.rectangle(imagem, (x, y), (x + l, y + a), (0, 0, 255), 2)
@@ -39,7 +39,7 @@ def cadastroRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casca
 
     return faceID, faceNome
 
-def treinaRosto (classifierDir = 'cascades\\haarcascade_frontalface_default.xml', trainerDir = 'trainer\\trainer.yml', datasetDir = 'dataset\\'):
+def treinaRosto (classifierDir = 'cascades/haarcascade_frontalface_default.xml', trainerDir = 'trainer/trainer.yml', datasetDir = 'dataset/'):
     reconhecedor = cv2.face.LBPHFaceRecognizer_create()
     detector = cv2.CascadeClassifier(classifierDir)
 
@@ -60,7 +60,7 @@ def treinaRosto (classifierDir = 'cascades\\haarcascade_frontalface_default.xml'
     reconhecedor.train(amostrasFaces, np.array(IDs))
     reconhecedor.write(trainerDir)
 
-def reconheceRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'cascades\\haarcascade_frontalface_default.xml', trainerDir = 'trainer\\trainer.yml', nomes=0, IDs=0):
+def reconheceRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'cascades/haarcascade_frontalface_default.xml', trainerDir = 'trainer/trainer.yml', nomes=0, IDs=0):
     reconhecedor = cv2.face.LBPHFaceRecognizer_create()
     reconhecedor.read(trainerDir)
     classificador = cv2.CascadeClassifier(classifierDir)
@@ -69,7 +69,7 @@ def reconheceRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casc
     # necessario codificar
     font = cv2.FONT_HERSHEY_SIMPLEX
     id = 0
-#    nomes = ['Vazia', 'Alexandre', 'Leonardo']
+    #nomes = ['Vazia', 'Alexandre', 'Leonardo']
 
     video = cv2.VideoCapture(stream)
     video.set(3, tamanhoVideo[0]) # largura da imagem
@@ -78,7 +78,7 @@ def reconheceRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casc
     minA = 0.1 * video.get(4)
 
     while(True):
-        imagem = video.read()
+        _, imagem = video.read()
         cinza = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
         faces = classificador.detectMultiScale(cinza, scaleFactor = 1.2, minNeighbors = 5, minSize = (int(minL), int(minA)))
 
@@ -99,5 +99,28 @@ def reconheceRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casc
 
         if cv2.waitKey(1) == ord('q'):
             break
+    video.release()
+    cv2.destroyAllWindows()
+
+def deteccaoRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'cascades/haarcascade_frontalface_default.xml'):
+    video = cv2.VideoCapture(stream)
+    video.set(3, tamanhoVideo[0]) # largura da imagem
+    video.set(4, tamanhoVideo[1]) # altura da imagem
+
+    faceDetector = cv2.CascadeClassifier(classifierDir)
+
+    while(True):
+        _, frame = video.read()
+        frameCinza = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = faceDetector.detectMultiScale(frameCinza, scaleFactor=1.05, minNeighbors=9, minSize=(30,30))
+
+        for(x, y, l, a) in faces:
+            cv2.rectangle(frame, (x, y), (x + l, y + a), (0, 0, 255), 2)
+
+        cv2.imshow("Video", frame)
+
+        if cv2.waitKey(1) == ord('q'):
+            break
+
     video.release()
     cv2.destroyAllWindows()

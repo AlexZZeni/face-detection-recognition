@@ -12,8 +12,8 @@ video = cv2.VideoCapture(0)
 video.set(3,640) # set Width
 video.set(4,480) # set Height
 
-face = cv2.CascadeClassifier('cascades\\haarcascade_frontalface_default.xml')
-olhos = cv2.CascadeClassifier('cascades\\haarcascade_eye.xml')
+face = cv2.CascadeClassifier('cascades/haarcascade_frontalface_default.xml')
+olhos = cv2.CascadeClassifier('cascades/haarcascade_eye.xml')
 
 while True:
     conectado, frame = video.read()

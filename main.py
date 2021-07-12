@@ -23,5 +23,6 @@ while(True):
         functions.reconheceRosto()
         functions.reconheceRosto(nomes = facesNome)
 
-    elif(opcao == '4'):
+    elif(opcao == '4'): # Detecção de Faces
+        functions.deteccaoRosto()
         break
