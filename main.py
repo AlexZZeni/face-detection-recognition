@@ -25,4 +25,6 @@ while(True):
 
     elif(opcao == '4'): # Detecção de Faces
         functions.deteccaoRosto()
+
+    elif(opcao == '5'): # sair
         break
