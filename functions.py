@@ -23,7 +23,7 @@ def cadastroRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casca
             cv2.rectangle(imagem, (x, y), (x + l, y + a), (0, 0, 255), 2)
             i += 1
             cv2.imwrite(datasetDir + "User." + str(faceID) + "." + str(i) + ".jpg", cinza[y:y + a, x:x + l])
-            cv2.imshow("Imagem", imagem)
+            cv2.imshow("Imagem", cv2.flip(imagem, 1))
 
         if cv2.waitKey(1) == ord('q'):
             break
@@ -95,7 +95,7 @@ def reconheceRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casc
 
             cv2.putText(imagem, str(id), (x + 5, y - 5), font, 1, (255, 255, 255), 2)
             cv2.putText(imagem, str(confianca), (x + 5, y + a - 5), font, 1, (255, 255, 0), 1) 
-        cv2.imshow("Video",imagem)
+        cv2.imshow("Video",cv2.flip(imagem, 1))
 
         if cv2.waitKey(1) == ord('q'):
             break
@@ -117,7 +117,7 @@ def deteccaoRosto (stream = 0, tamanhoVideo = [640, 480], classifierDir = 'casca
         for(x, y, l, a) in faces:
             cv2.rectangle(frame, (x, y), (x + l, y + a), (0, 0, 255), 2)
 
-        cv2.imshow("Video", frame)
+        cv2.imshow("Video", cv2.flip(frame, 1))
 
         if cv2.waitKey(1) == ord('q'):
             break
